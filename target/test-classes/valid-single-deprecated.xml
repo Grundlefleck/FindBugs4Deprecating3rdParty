@@ -1,0 +1,3 @@
+<FindBugsDeprecated>
+	<Match classregex="java.util.List"/>
+</FindBugsDeprecated>
