@@ -1,7 +1,9 @@
 package com.youdevise.fbplugins.deprecate3rdparty;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.xalan.xsltc.compiler.util.Type;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.Attribute;
 import org.objectweb.asm.ClassVisitor;
@@ -9,8 +11,10 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 
+import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector;
+import edu.umd.cs.findbugs.Priorities;
 import edu.umd.cs.findbugs.asm.FBClassReader;
 import edu.umd.cs.findbugs.ba.ClassContext;
 import edu.umd.cs.findbugs.classfile.CheckedAnalysisException;
@@ -46,18 +50,30 @@ public class Deprecated3rdPartyDetector implements Detector {
         } catch (CheckedAnalysisException e) {
             e.printStackTrace();
         }
+        
+        for (BugInstance bug: deprecatedClassVisitor.deprecatedUsageBugs()) {
+        	bugReporter.reportBug(bug);
+        }
     }
 
     private static class DeprecatedClassVisitor implements ClassVisitor, FieldVisitor, MethodVisitor {
 
         private final List<String> deprecatedClasses;
+		private List<BugInstance> deprecatedUsageBugs = new ArrayList<BugInstance>();
+		private String className;
 
         public DeprecatedClassVisitor(List<String> deprecatedClasses) {
             this.deprecatedClasses = deprecatedClasses;
         }
+        
+        public Iterable<BugInstance> deprecatedUsageBugs() {
+        	return deprecatedUsageBugs;
+        }
+        
 
         @Override
         public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+			this.className = name;
             
         }
 
@@ -77,7 +93,13 @@ public class Deprecated3rdPartyDetector implements Detector {
         }
 
         @Override
-        public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
+        public FieldVisitor visitField(int access, String fieldName, String desc, String signature, Object value) {
+        	String dotted = desc.substring(1).replace("/", ".").replace(";", "");
+        	if (deprecatedClasses.contains(dotted)) {
+        		BugInstance hasDeprecatedField = new BugInstance("DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
+        		hasDeprecatedField.addField(className, fieldName, desc, (access & Type.ACC_STATIC) == 0);
+        		deprecatedUsageBugs.add(hasDeprecatedField);
+        	}
             return this;
         }
 
