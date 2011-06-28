@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="2.0.0-dev-20110627" sequence="0" timestamp="1309206221000" analysisTimestamp="1309208255686" release="">
+  <Project projectName="FindBugsDeprecate3rdParty">
+    <Jar>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/target/classes</Jar>
+    <Jar>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/target/test-classes</Jar>
+    <SrcDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/src/main/java</SrcDir>
+    <SrcDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/src/test/java</SrcDir>
+    <SrcDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/src/test/benchmarks</SrcDir>
+    <SuppressionFilter>
+      <LastVersion value="-1" relOp="NEQ"/>
+    </SuppressionFilter>
+  </Project>
+  <CloudDetails online="false"/>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" abbrev="Dm" category="I18N">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+    </Class>
+    <Method classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" name="settingsFromTxtFile" signature="(Ljava/lang/String;)Lcom/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings;" isStatic="true">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" start="44" end="66" startBytecode="0" endBytecode="456" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+    </Method>
+    <Method classname="java.io.FileReader" name="&lt;init&gt;" signature="(Ljava/io/File;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.FileReader" start="55" end="56" startBytecode="0" endBytecode="40" sourcefile="FileReader.java" sourcepath="java/io/FileReader.java"/>
+    </Method>
+    <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" start="53" end="53" startBytecode="61" endBytecode="61" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="19">
+    <MissingClass>com.youdevise.fbplugins.tdd4fb.DetectorAssert</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.BugInstance</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.BugReporter</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.Detector</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.SystemProperties</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.asm.FBClassReader</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.ba.ClassContext</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.classfile.CheckedAnalysisException</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.classfile.ClassDescriptor</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.classfile.Global</MissingClass>
+    <MissingClass>edu.umd.cs.findbugs.classfile.IAnalysisCache</MissingClass>
+    <MissingClass>org.apache.commons.lang.StringUtils</MissingClass>
+    <MissingClass>org.junit.Assert</MissingClass>
+    <MissingClass>org.junit.Before</MissingClass>
+    <MissingClass>org.junit.Test</MissingClass>
+    <MissingClass>org.mockito.Mockito</MissingClass>
+    <MissingClass>org.objectweb.asm.ClassVisitor</MissingClass>
+    <MissingClass>org.objectweb.asm.FieldVisitor</MissingClass>
+    <MissingClass>org.objectweb.asm.MethodVisitor</MissingClass>
+  </Errors>
+  <FindBugsSummary timestamp="Mon, 27 Jun 2011 21:23:41 +0100" total_classes="9" referenced_classes="34" total_bugs="1" total_size="244" num_packages="1" vm_version="19.1-b02" cpu_seconds="24.56" clock_seconds="128.72" peak_mbytes="94.10" alloc_mbytes="442.69" gc_seconds="0.21" priority_1="1">
+    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="1" total_types="9" total_size="244" priority_1="1">
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector$DeprecatedClassVisitor" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="77" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest" sourceFile="Deprecated3rdPartyDetectorTest.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourceFile="DeprecatedSettings.java" interface="false" size="53" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettingsReaderTest" sourceFile="DeprecatedSettingsReaderTest.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourceFile="HasDeprecatedClassForAField.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourceFile="MyDeprecatedClass.java" interface="false" size="3" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector" sourceFile="ThisPluginDetector.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector$SetupChecker" sourceFile="ThisPluginDetector.java" interface="false" size="20" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.FindBugs2" totalMilliseconds="3339" invocations="2" avgMicrosecondsPerInvocation="1669636" maxMicrosecondsPerInvocation="1965399" standardDeviationMircosecondsPerInvocation="295760"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="927" invocations="445" avgMicrosecondsPerInvocation="2085" maxMicrosecondsPerInvocation="132080" standardDeviationMircosecondsPerInvocation="7156"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="789" invocations="446" avgMicrosecondsPerInvocation="1770" maxMicrosecondsPerInvocation="49986" standardDeviationMircosecondsPerInvocation="5064"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ExplicitSerialization" totalMilliseconds="618" invocations="34" avgMicrosecondsPerInvocation="18185" maxMicrosecondsPerInvocation="152773" standardDeviationMircosecondsPerInvocation="31778"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="616" invocations="962" avgMicrosecondsPerInvocation="641" maxMicrosecondsPerInvocation="23106" standardDeviationMircosecondsPerInvocation="2059"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="571" invocations="34" avgMicrosecondsPerInvocation="16803" maxMicrosecondsPerInvocation="89482" standardDeviationMircosecondsPerInvocation="24515"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="377" invocations="34" avgMicrosecondsPerInvocation="11117" maxMicrosecondsPerInvocation="89820" standardDeviationMircosecondsPerInvocation="18593"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="377" invocations="64" avgMicrosecondsPerInvocation="5892" maxMicrosecondsPerInvocation="98816" standardDeviationMircosecondsPerInvocation="15540"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="333" invocations="63" avgMicrosecondsPerInvocation="5290" maxMicrosecondsPerInvocation="101300" standardDeviationMircosecondsPerInvocation="14018"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="331" invocations="89" avgMicrosecondsPerInvocation="3724" maxMicrosecondsPerInvocation="87550" standardDeviationMircosecondsPerInvocation="10918"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="329" invocations="63" avgMicrosecondsPerInvocation="5236" maxMicrosecondsPerInvocation="81856" standardDeviationMircosecondsPerInvocation="12586"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="280" invocations="63" avgMicrosecondsPerInvocation="4450" maxMicrosecondsPerInvocation="60218" standardDeviationMircosecondsPerInvocation="10419"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="278" invocations="63" avgMicrosecondsPerInvocation="4427" maxMicrosecondsPerInvocation="250161" standardDeviationMircosecondsPerInvocation="31243"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="199" invocations="34" avgMicrosecondsPerInvocation="5872" maxMicrosecondsPerInvocation="38694" standardDeviationMircosecondsPerInvocation="9769"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

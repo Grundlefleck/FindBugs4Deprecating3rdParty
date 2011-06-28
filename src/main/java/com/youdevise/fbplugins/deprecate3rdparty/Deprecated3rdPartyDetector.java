@@ -14,12 +14,15 @@ import org.objectweb.asm.MethodVisitor;
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector;
+import edu.umd.cs.findbugs.MethodAnnotation;
 import edu.umd.cs.findbugs.Priorities;
 import edu.umd.cs.findbugs.asm.FBClassReader;
 import edu.umd.cs.findbugs.ba.ClassContext;
 import edu.umd.cs.findbugs.classfile.CheckedAnalysisException;
 import edu.umd.cs.findbugs.classfile.ClassDescriptor;
+import edu.umd.cs.findbugs.classfile.DescriptorFactory;
 import edu.umd.cs.findbugs.classfile.Global;
+import edu.umd.cs.findbugs.classfile.MethodDescriptor;
 
 public class Deprecated3rdPartyDetector implements Detector {
 
@@ -61,6 +64,7 @@ public class Deprecated3rdPartyDetector implements Detector {
         private final List<String> deprecatedClasses;
 		private List<BugInstance> deprecatedUsageBugs = new ArrayList<BugInstance>();
         private final ClassDescriptor classToAnalyseDescriptor;
+		private MethodDescriptor currentMethodDescriptor;
 
         public DeprecatedClassVisitor(List<String> deprecatedClasses, ClassDescriptor classToAnalyseDescriptor) {
             this.deprecatedClasses = deprecatedClasses;
@@ -112,6 +116,9 @@ public class Deprecated3rdPartyDetector implements Detector {
 
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+        	currentMethodDescriptor = new MethodDescriptor(classToAnalyseDescriptor.getClassName(),
+        												   name, desc, (access & Type.ACC_STATIC) != 0);
+        	
             return this;
         }
 
@@ -176,11 +183,20 @@ public class Deprecated3rdPartyDetector implements Detector {
         }
 
         @Override
-        public void visitLineNumber(int arg0, Label arg1) { }
+        public void visitLineNumber(int lineNumber, Label label) {
+        	System.out.printf("[%d]%n", lineNumber);
+        }
 
         @Override
-        public void visitLocalVariable(String arg0, String arg1, String arg2, Label arg3, Label arg4, int arg5) {
-            
+        public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
+            System.out.printf("[%s][%s][%s][%s][%s][%d]%n", name, desc, signature, start, end, index);
+            ClassDescriptor classDescriptor = DescriptorFactory.createClassDescriptorFromSignature(desc);
+            if (deprecatedClasses.contains(classDescriptor.getDottedClassName())) {
+            	BugInstance hasDeprecatedLocalVariable = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
+                hasDeprecatedLocalVariable.addClass(classToAnalyseDescriptor);
+        		hasDeprecatedLocalVariable.addMethod((MethodAnnotation)MethodAnnotation.fromMethodDescriptor(currentMethodDescriptor));
+        		deprecatedUsageBugs.add(hasDeprecatedLocalVariable);
+            }
         }
 
         @Override

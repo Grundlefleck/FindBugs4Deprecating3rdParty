@@ -6,7 +6,6 @@ import static org.mockito.Mockito.mock;
 import java.util.Collections;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.youdevise.fbplugins.tdd4fb.DetectorAssert;
@@ -19,18 +18,24 @@ public class Deprecated3rdPartyDetectorTest {
     private BugReporter bugReporter;
     private Detector detector;
     private Detector detectorToRegisterBugsAs;
+	private DeprecatedSettings settings;
 
     @Before
     public void setUp() {
         bugReporter = DetectorAssert.bugReporterForTesting();
         detectorToRegisterBugsAs = mock(Detector.class);
+        settings = new DeprecatedSettings(asList(MyDeprecatedClass.class.getCanonicalName()), Collections.<String>emptyList());
+        detector = new Deprecated3rdPartyDetector(detectorToRegisterBugsAs, bugReporter, settings); 
     }
 
     @Test
     public void reportsBugWhenFieldIsADeprecatedClass() throws Exception {
-        DeprecatedSettings settings = new DeprecatedSettings(asList(MyDeprecatedClass.class.getCanonicalName()), Collections.<String>emptyList());
-        detector = new Deprecated3rdPartyDetector(detectorToRegisterBugsAs, bugReporter, settings); 
         DetectorAssert.assertBugReported(HasDeprecatedClassForAField.class, detector, bugReporter);
+    }
+    
+    @Test
+    public void reportsBugWhenLocalVariableIsADeprecatedClass() throws Exception {
+        DetectorAssert.assertBugReported(HasADeprecatedClassForALocalVariable.class, detector, bugReporter);
     }
 
 }
