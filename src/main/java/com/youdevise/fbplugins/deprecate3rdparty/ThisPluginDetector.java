@@ -68,6 +68,7 @@ public class ThisPluginDetector implements Detector {
 	public void visitClassContext(ClassContext classContext) {
 	    if (! settings.isValid()) { return; }
 	    
+	    actualDetector.visitClassContext(classContext);
 	}
 	
 

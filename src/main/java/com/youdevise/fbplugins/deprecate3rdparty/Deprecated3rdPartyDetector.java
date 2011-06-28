@@ -15,11 +15,14 @@ import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector;
 import edu.umd.cs.findbugs.Priorities;
+import edu.umd.cs.findbugs.SourceLineAnnotation;
 import edu.umd.cs.findbugs.asm.FBClassReader;
 import edu.umd.cs.findbugs.ba.ClassContext;
 import edu.umd.cs.findbugs.classfile.CheckedAnalysisException;
 import edu.umd.cs.findbugs.classfile.ClassDescriptor;
+import edu.umd.cs.findbugs.classfile.DescriptorFactory;
 import edu.umd.cs.findbugs.classfile.Global;
+import edu.umd.cs.findbugs.classfile.analysis.ClassInfo;
 
 public class Deprecated3rdPartyDetector implements Detector {
 
@@ -56,7 +59,7 @@ public class Deprecated3rdPartyDetector implements Detector {
         }
     }
 
-    private static class DeprecatedClassVisitor implements ClassVisitor, FieldVisitor, MethodVisitor {
+    private class DeprecatedClassVisitor implements ClassVisitor, FieldVisitor, MethodVisitor {
 
         private final List<String> deprecatedClasses;
 		private List<BugInstance> deprecatedUsageBugs = new ArrayList<BugInstance>();
@@ -94,11 +97,14 @@ public class Deprecated3rdPartyDetector implements Detector {
 
         @Override
         public FieldVisitor visitField(int access, String fieldName, String desc, String signature, Object value) {
-        	String dotted = desc.substring(1).replace("/", ".").replace(";", "");
-        	if (deprecatedClasses.contains(dotted)) {
-        		BugInstance hasDeprecatedField = new BugInstance("DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
-        		hasDeprecatedField.addField(className, fieldName, desc, (access & Type.ACC_STATIC) == 0);
+        	String typeOfFieldDottedClassName = desc.substring(1).replace("/", ".").replace(";", "");
+        	if (deprecatedClasses.contains(typeOfFieldDottedClassName)) {
+        		BugInstance hasDeprecatedField = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
+        		ClassDescriptor thisClassDescriptor = DescriptorFactory.createClassDescriptor(className);
+                hasDeprecatedField.addClass(thisClassDescriptor);
+        		hasDeprecatedField.addField(thisClassDescriptor.getDottedClassName(), fieldName, desc, (access & Type.ACC_STATIC) == 0);
         		deprecatedUsageBugs.add(hasDeprecatedField);
+        		
         	}
             return this;
         }
@@ -174,9 +180,7 @@ public class Deprecated3rdPartyDetector implements Detector {
         }
 
         @Override
-        public void visitLineNumber(int arg0, Label arg1) {
-            
-        }
+        public void visitLineNumber(int arg0, Label arg1) { }
 
         @Override
         public void visitLocalVariable(String arg0, String arg1, String arg2, Label arg3, Label arg4, int arg5) {
