@@ -15,14 +15,11 @@ import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector;
 import edu.umd.cs.findbugs.Priorities;
-import edu.umd.cs.findbugs.SourceLineAnnotation;
 import edu.umd.cs.findbugs.asm.FBClassReader;
 import edu.umd.cs.findbugs.ba.ClassContext;
 import edu.umd.cs.findbugs.classfile.CheckedAnalysisException;
 import edu.umd.cs.findbugs.classfile.ClassDescriptor;
-import edu.umd.cs.findbugs.classfile.DescriptorFactory;
 import edu.umd.cs.findbugs.classfile.Global;
-import edu.umd.cs.findbugs.classfile.analysis.ClassInfo;
 
 public class Deprecated3rdPartyDetector implements Detector {
 
@@ -46,7 +43,7 @@ public class Deprecated3rdPartyDetector implements Detector {
         ClassDescriptor classDescriptor = classContext.getClassDescriptor();
         
         FBClassReader reader = null;
-        DeprecatedClassVisitor deprecatedClassVisitor = new DeprecatedClassVisitor(deprecatedClasses);
+        DeprecatedClassVisitor deprecatedClassVisitor = new DeprecatedClassVisitor(deprecatedClasses, classDescriptor);
         try {
             reader = Global.getAnalysisCache().getClassAnalysis(FBClassReader.class, classDescriptor);
             reader.accept(deprecatedClassVisitor, 0);
@@ -63,10 +60,11 @@ public class Deprecated3rdPartyDetector implements Detector {
 
         private final List<String> deprecatedClasses;
 		private List<BugInstance> deprecatedUsageBugs = new ArrayList<BugInstance>();
-		private String className;
+        private final ClassDescriptor classToAnalyseDescriptor;
 
-        public DeprecatedClassVisitor(List<String> deprecatedClasses) {
+        public DeprecatedClassVisitor(List<String> deprecatedClasses, ClassDescriptor classToAnalyseDescriptor) {
             this.deprecatedClasses = deprecatedClasses;
+            this.classToAnalyseDescriptor = classToAnalyseDescriptor;
         }
         
         public Iterable<BugInstance> deprecatedUsageBugs() {
@@ -76,7 +74,6 @@ public class Deprecated3rdPartyDetector implements Detector {
 
         @Override
         public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-			this.className = name;
             
         }
 
@@ -100,9 +97,8 @@ public class Deprecated3rdPartyDetector implements Detector {
         	String typeOfFieldDottedClassName = desc.substring(1).replace("/", ".").replace(";", "");
         	if (deprecatedClasses.contains(typeOfFieldDottedClassName)) {
         		BugInstance hasDeprecatedField = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
-        		ClassDescriptor thisClassDescriptor = DescriptorFactory.createClassDescriptor(className);
-                hasDeprecatedField.addClass(thisClassDescriptor);
-        		hasDeprecatedField.addField(thisClassDescriptor.getDottedClassName(), fieldName, desc, (access & Type.ACC_STATIC) == 0);
+                hasDeprecatedField.addClass(classToAnalyseDescriptor);
+        		hasDeprecatedField.addField(classToAnalyseDescriptor.getDottedClassName(), fieldName, desc, (access & Type.ACC_STATIC) == 0);
         		deprecatedUsageBugs.add(hasDeprecatedField);
         		
         	}

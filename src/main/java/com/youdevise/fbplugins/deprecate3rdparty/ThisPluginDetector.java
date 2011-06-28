@@ -1,8 +1,6 @@
 package com.youdevise.fbplugins.deprecate3rdparty;
 
 
-import java.io.File;
-
 import org.apache.commons.lang.StringUtils;
 
 import edu.umd.cs.findbugs.BugReporter;
@@ -44,12 +42,10 @@ public class ThisPluginDetector implements Detector {
         System.out.printf("Registered plugin detector [%s]%n", loggingLabel);
     }
 	
-	private final BugReporter bugReporter;
     private final DeprecatedSettings settings;
     private final Deprecated3rdPartyDetector actualDetector;
 	
 	public ThisPluginDetector(BugReporter bugReporter) {
-		this.bugReporter = bugReporter;
 		this.settings = createSettings();
 		this.actualDetector = new Deprecated3rdPartyDetector(this, bugReporter, settings);
 	}
