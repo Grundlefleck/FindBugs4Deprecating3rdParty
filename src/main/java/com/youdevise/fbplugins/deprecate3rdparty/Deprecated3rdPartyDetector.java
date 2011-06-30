@@ -80,17 +80,17 @@ public class Deprecated3rdPartyDetector implements Detector {
 		public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) { 
 			ClassDescriptor superclassDescriptor = DescriptorFactory.createClassDescriptor(superName);
 			if (deprecatedClasses.contains(superclassDescriptor.getDottedClassName())) {
-				BugInstance extendsDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY)
-														 	.addClass(classToAnalyseDescriptor);
+				BugInstance extendsDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
+			 	extendsDeprecatedClass.addClass(classToAnalyseDescriptor);
 				deprecatedUsageBugs.add(extendsDeprecatedClass);
 			}
 			
 			for (String interfaceName : interfaces) {
 				ClassDescriptor interfaceDescripter = DescriptorFactory.createClassDescriptor(interfaceName);
 				if (deprecatedClasses.contains(interfaceDescripter.getDottedClassName())) {
-					BugInstance extendsDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY)
-															 	.addClass(classToAnalyseDescriptor);
-					deprecatedUsageBugs.add(extendsDeprecatedClass);
+					BugInstance implementsDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
+				 	implementsDeprecatedClass.addClass(classToAnalyseDescriptor);
+					deprecatedUsageBugs.add(implementsDeprecatedClass);
 				}
 			}
 		}
@@ -119,13 +119,18 @@ public class Deprecated3rdPartyDetector implements Detector {
 
 		@Override
 		public void visitLineNumber(int lineNumber, Label label) {
-			System.out.printf("[%d]%n", lineNumber);
+//			System.out.printf("[%d]%n", lineNumber);
 		}
 
 		@Override
 		public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
-			ClassDescriptor classDescriptor = DescriptorFactory.createClassDescriptorFromSignature(desc);
-			if (deprecatedClasses.contains(classDescriptor.getDottedClassName())) {
+			ClassDescriptor classDescriptor = DescriptorFactory.createClassDescriptorFromFieldSignature(desc);
+			
+			if (classDescriptor == null) {
+			    return; // parameter type is not a class
+			}
+			
+			if (deprecatedClasses.contains(classDescriptor.toDottedClassName())) {
 				BugInstance hasDeprecatedLocalVariable = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS",
 						Priorities.HIGH_PRIORITY);
 				hasDeprecatedLocalVariable.addClass(classToAnalyseDescriptor);

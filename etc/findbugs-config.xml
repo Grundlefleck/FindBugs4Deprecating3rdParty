@@ -11,6 +11,48 @@
       <LastVersion value="-1" relOp="NEQ"/>
     </SuppressionFilter>
   </Project>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" sourcefile="HasADeprecatedClassAsAMethodParameter.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassAsAMethodParameter.java"/>
+    </Class>
+    <Method classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" name="&lt;init&gt;" signature="(Lcom/youdevise/fbplugins/deprecate3rdparty/MyDeprecatedClass;)V" isStatic="false">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" start="5" end="7" startBytecode="0" endBytecode="60" sourcefile="HasADeprecatedClassAsAMethodParameter.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassAsAMethodParameter.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsSuperclass">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsSuperclass" sourcefile="HasADeprecatedClassAsSuperclass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassAsSuperclass.java"/>
+    </Class>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable" sourcefile="HasADeprecatedClassForALocalVariable.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassForALocalVariable.java"/>
+    </Class>
+    <Method classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable" name="someMethod" signature="()V" isStatic="false">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable" start="9" end="15" startBytecode="0" endBytecode="138" sourcefile="HasADeprecatedClassForALocalVariable.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassForALocalVariable.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS" introducedByChange="true">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourcefile="HasDeprecatedClassForAField.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasDeprecatedClassForAField.java"/>
+    </Class>
+    <Field classname="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" name="aField" signature="Lcom/youdevise/fbplugins/deprecate3rdparty/MyDeprecatedClass;" isStatic="true">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourcefile="HasDeprecatedClassForAField.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasDeprecatedClassForAField.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.ImplementsADeprecatedInterface">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.ImplementsADeprecatedInterface" sourcefile="ImplementsADeprecatedInterface.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/ImplementsADeprecatedInterface.java"/>
+    </Class>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS" introducedByChange="true">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourcefile="MyDeprecatedClass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/MyDeprecatedClass.java"/>
+    </Class>
+    <Method classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" name="&lt;init&gt;" signature="()V" isStatic="false">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" start="3" end="3" startBytecode="0" endBytecode="46" sourcefile="MyDeprecatedClass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/MyDeprecatedClass.java"/>
+    </Method>
+  </BugInstance>
   <Errors>
     <MissingClass>com.youdevise.fbplugins.tdd4fb.DetectorAssert</MissingClass>
     <MissingClass>edu.umd.cs.findbugs.BugInstance</MissingClass>
@@ -32,15 +74,19 @@
     <MissingClass>org.objectweb.asm.FieldVisitor</MissingClass>
     <MissingClass>org.objectweb.asm.MethodVisitor</MissingClass>
   </Errors>
-  <FindBugsSummary timestamp="Tue, 28 Jun 2011 13:01:10 +0100" total_classes="9" total_bugs="0" total_size="244" num_packages="1" vm_version="11.3-b02" cpu_seconds="14.74" clock_seconds="153.03" peak_mbytes="198.85" alloc_mbytes="1765.38" gc_seconds="0.05">
-    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="0" total_types="9" total_size="244">
+  <FindBugsSummary timestamp="Tue, 28 Jun 2011 13:01:10 +0100" total_classes="9" total_bugs="6" total_size="244" num_packages="1" vm_version="11.3-b02" cpu_seconds="13.81" clock_seconds="336.58" peak_mbytes="162.77" alloc_mbytes="1765.38" gc_seconds="0.02" priority_1="6">
+    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="6" total_types="13" total_size="244" priority_1="6">
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="24" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector$DeprecatedClassVisitor" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="77" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest" sourceFile="Deprecated3rdPartyDetectorTest.java" interface="false" size="15" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourceFile="DeprecatedSettings.java" interface="false" size="53" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettingsReaderTest" sourceFile="DeprecatedSettingsReaderTest.java" interface="false" size="22" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourceFile="HasDeprecatedClassForAField.java" interface="false" size="4" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourceFile="MyDeprecatedClass.java" interface="false" size="3" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" sourceFile="HasADeprecatedClassAsAMethodParameter.java" interface="false" size="0" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsSuperclass" sourceFile="HasADeprecatedClassAsSuperclass.java" interface="false" size="0" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable" sourceFile="HasADeprecatedClassForALocalVariable.java" interface="false" size="0" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourceFile="HasDeprecatedClassForAField.java" interface="false" size="4" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ImplementsADeprecatedInterface" sourceFile="ImplementsADeprecatedInterface.java" interface="false" size="0" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourceFile="MyDeprecatedClass.java" interface="false" size="3" bugs="1" priority_1="1"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector" sourceFile="ThisPluginDetector.java" interface="false" size="26" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector$SetupChecker" sourceFile="ThisPluginDetector.java" interface="false" size="20" bugs="0"/>
     </PackageStats>
