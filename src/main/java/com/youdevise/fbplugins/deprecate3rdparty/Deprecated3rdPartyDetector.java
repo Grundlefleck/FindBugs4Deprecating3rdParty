@@ -1,6 +1,7 @@
 package com.youdevise.fbplugins.deprecate3rdparty;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.xalan.xsltc.compiler.util.Type;
@@ -93,9 +94,27 @@ public class Deprecated3rdPartyDetector implements Detector {
 					deprecatedUsageBugs.add(implementsDeprecatedClass);
 				}
 			}
+			
+			ClassDescriptor signatureDescriptor = DescriptorFactory.createClassDescriptorFromSignature(signature);
+			
+			List<String> typesInGenericSignature = getTypesInGenericsOfSignature(signature);
 		}
 		
-		@Override
+		private List<String> getTypesInGenericsOfSignature(String signature) {
+		    String genericsSignature = signature.substring(signature.lastIndexOf("<") + 1,  // remove '<' 
+		                                                   signature.lastIndexOf(">") - 1); // remove '>'
+		    String[] split = genericsSignature.split(";");
+		    List<String> dottedTypesInGenerics = new ArrayList<String>();
+		    for (String type: split) {
+		        String className = type.substring(1); // remove 'L'
+		        String dottedClassName = DescriptorFactory.createClassDescriptor(className).getDottedClassName();
+		        dottedTypesInGenerics.add(dottedClassName);
+		    }
+		    
+            return Arrays.asList(split);
+        }
+
+        @Override
 		public FieldVisitor visitField(int access, String fieldName, String desc, String signature, Object value) {
 			String typeOfFieldDottedClassName = desc.substring(1).replace("/", ".").replace(";", "");
 			if (deprecatedClasses.contains(typeOfFieldDottedClassName)) {
@@ -162,7 +181,17 @@ public class Deprecated3rdPartyDetector implements Detector {
 
 		@Override public void visitFieldInsn(int opcode, String owner, String name, String desc) { }
 
-		@Override public void visitMethodInsn(int opcode, String owner, String name, String desc) { }
+		@Override public void visitMethodInsn(int opcode, String owner, String name, String desc) { 
+		    ClassDescriptor methodCalledOn = DescriptorFactory.createClassDescriptor(owner);
+		    
+		    if (deprecatedClasses.contains(methodCalledOn.getDottedClassName())) {
+		        BugInstance callsMethodOfDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS",
+                        Priorities.HIGH_PRIORITY);
+		        callsMethodOfDeprecatedClass.addClass(classToAnalyseDescriptor);
+		        callsMethodOfDeprecatedClass.addMethod((MethodAnnotation) MethodAnnotation.fromMethodDescriptor(currentMethodDescriptor));
+                deprecatedUsageBugs.add(callsMethodOfDeprecatedClass);
+		    }
+		}
 
 		@Override public void visitJumpInsn(int opcode, Label label) { }
 
