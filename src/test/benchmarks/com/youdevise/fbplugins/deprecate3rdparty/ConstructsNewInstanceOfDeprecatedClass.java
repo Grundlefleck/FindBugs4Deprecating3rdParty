@@ -5,5 +5,4 @@ public class ConstructsNewInstanceOfDeprecatedClass {
     public void instanceMethod() {
         new MyDeprecatedClass();
     }
-    
 }

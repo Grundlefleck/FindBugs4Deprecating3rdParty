@@ -1,7 +1,6 @@
 package com.youdevise.fbplugins.deprecate3rdparty;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 import java.util.Collections;
@@ -74,4 +73,25 @@ public class Deprecated3rdPartyDetectorTest {
     public void reportsBugWhenReferencingDeprecatedClassInGenericsOfSuperclass() throws Exception {
         DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInGenericsOfTypeSignature.class, detector, bugReporter);
     }
+    
+    @Test
+    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfField() throws Exception {
+        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInGenericsOfField.class, detector, bugReporter);
+    }
+    
+    @Test
+    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfLocalVariable() throws Exception {
+        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInGenericsOfLocalVariable.class, detector, bugReporter);
+    }
+    
+    @Test
+    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfMethodParameter() throws Exception {
+        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInMethodParameter.class, detector, bugReporter);
+    }
+    
+    @Test
+    public void reportsBugWhenReferencingDeprecatedClassInInstanceOfCheck() throws Exception {
+        DetectorAssert.assertBugReported(UsesDeprecatedClassInInstanceOfCheck.class, detector, bugReporter);
+    }
+    
 }

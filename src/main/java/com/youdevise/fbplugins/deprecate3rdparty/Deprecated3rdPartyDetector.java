@@ -1,7 +1,8 @@
 package com.youdevise.fbplugins.deprecate3rdparty;
 
+import static edu.umd.cs.findbugs.MethodAnnotation.fromMethodDescriptor;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.xalan.xsltc.compiler.util.Type;
@@ -76,62 +77,82 @@ public class Deprecated3rdPartyDetector implements Detector {
 		public Iterable<BugInstance> deprecatedUsageBugs() {
 			return deprecatedUsageBugs;
 		}
+		
+		private BugInstance reportNewBugInstance() {
+			BugInstance bugInstance = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
+			bugInstance.addClass(classToAnalyseDescriptor);
+			deprecatedUsageBugs.add(bugInstance);
+			return bugInstance;
+			
+		}
+
+		private void addMethodAnnotationToBug(BugInstance bugInstance) {
+			bugInstance.addMethod((MethodAnnotation) fromMethodDescriptor(currentMethodDescriptor));
+		}
+		
+		private boolean signatureReferencesDeprecatedType(String signature) {
+			if (signature != null) {
+				List<ClassDescriptor> typesInGenericSignature = getTypesInGenericsOfSignature(signature);
+				
+				for (ClassDescriptor genericType : typesInGenericSignature) {
+					if (deprecatedClasses.contains(genericType.getDottedClassName())){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		private List<ClassDescriptor> getTypesInGenericsOfSignature(String signature) {
+		    String genericsSignature = signature.substring(signature.lastIndexOf("<") + 1,  // remove '<' 
+		                                                   signature.lastIndexOf(">") - 1); // remove '>'
+		    String[] split = genericsSignature.split(";");
+		    List<ClassDescriptor> dottedTypesInGenerics = new ArrayList<ClassDescriptor>();
+		    for (String type: split) {
+		        String className = type.substring(1); // remove 'L'
+		        ClassDescriptor dottedClassName = DescriptorFactory.createClassDescriptor(className);
+		        dottedTypesInGenerics.add(dottedClassName);
+		    }
+		    
+            return dottedTypesInGenerics;
+        }
 
 		@Override 
 		public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) { 
 			ClassDescriptor superclassDescriptor = DescriptorFactory.createClassDescriptor(superName);
 			if (deprecatedClasses.contains(superclassDescriptor.getDottedClassName())) {
-				BugInstance extendsDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
-			 	extendsDeprecatedClass.addClass(classToAnalyseDescriptor);
-				deprecatedUsageBugs.add(extendsDeprecatedClass);
+				reportNewBugInstance();
 			}
 			
 			for (String interfaceName : interfaces) {
 				ClassDescriptor interfaceDescripter = DescriptorFactory.createClassDescriptor(interfaceName);
 				if (deprecatedClasses.contains(interfaceDescripter.getDottedClassName())) {
-					BugInstance implementsDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
-				 	implementsDeprecatedClass.addClass(classToAnalyseDescriptor);
-					deprecatedUsageBugs.add(implementsDeprecatedClass);
+					reportNewBugInstance();
 				}
 			}
 			
-			ClassDescriptor signatureDescriptor = DescriptorFactory.createClassDescriptorFromSignature(signature);
+			if (signatureReferencesDeprecatedType(signature)) {
+				reportNewBugInstance();
+			}
 			
-			List<String> typesInGenericSignature = getTypesInGenericsOfSignature(signature);
+			
 		}
 		
-		private List<String> getTypesInGenericsOfSignature(String signature) {
-		    String genericsSignature = signature.substring(signature.lastIndexOf("<") + 1,  // remove '<' 
-		                                                   signature.lastIndexOf(">") - 1); // remove '>'
-		    String[] split = genericsSignature.split(";");
-		    List<String> dottedTypesInGenerics = new ArrayList<String>();
-		    for (String type: split) {
-		        String className = type.substring(1); // remove 'L'
-		        String dottedClassName = DescriptorFactory.createClassDescriptor(className).getDottedClassName();
-		        dottedTypesInGenerics.add(dottedClassName);
-		    }
-		    
-            return Arrays.asList(split);
-        }
-
         @Override
 		public FieldVisitor visitField(int access, String fieldName, String desc, String signature, Object value) {
-			String typeOfFieldDottedClassName = desc.substring(1).replace("/", ".").replace(";", "");
-			if (deprecatedClasses.contains(typeOfFieldDottedClassName)) {
-				BugInstance hasDeprecatedField = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY);
-				hasDeprecatedField.addClass(classToAnalyseDescriptor);
+        	ClassDescriptor fieldDescriptor = DescriptorFactory.createClassDescriptorFromFieldSignature(desc);
+			if (deprecatedClasses.contains(fieldDescriptor.getDottedClassName()) 
+					|| signatureReferencesDeprecatedType(signature)) {
+				BugInstance hasDeprecatedField = reportNewBugInstance();
 				hasDeprecatedField.addField(classToAnalyseDescriptor.getDottedClassName(), fieldName, desc, (access & Type.ACC_STATIC) == 0);
-				deprecatedUsageBugs.add(hasDeprecatedField);
-
 			}
+			
 			return this;
 		}
 
 		@Override
 		public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-			currentMethodDescriptor = new MethodDescriptor(classToAnalyseDescriptor.getClassName(), 
-					name, desc,
-					(access & Type.ACC_STATIC) != 0);
+			currentMethodDescriptor = new MethodDescriptor(classToAnalyseDescriptor.getClassName(), name, desc, (access & Type.ACC_STATIC) != 0);
 
 			return this;
 		}
@@ -149,12 +170,10 @@ public class Deprecated3rdPartyDetector implements Detector {
 			    return; // parameter type is not a class
 			}
 			
-			if (deprecatedClasses.contains(classDescriptor.toDottedClassName())) {
-				BugInstance hasDeprecatedLocalVariable = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS",
-						Priorities.HIGH_PRIORITY);
-				hasDeprecatedLocalVariable.addClass(classToAnalyseDescriptor);
-				hasDeprecatedLocalVariable.addMethod((MethodAnnotation) MethodAnnotation.fromMethodDescriptor(currentMethodDescriptor));
-				deprecatedUsageBugs.add(hasDeprecatedLocalVariable);
+			if (deprecatedClasses.contains(classDescriptor.toDottedClassName()) 
+					|| signatureReferencesDeprecatedType(signature)) {
+				BugInstance hasDeprecatedLocalVariable = reportNewBugInstance();
+				hasDeprecatedLocalVariable.addMethod((MethodAnnotation) fromMethodDescriptor(currentMethodDescriptor));
 			}
 		}
 
@@ -177,7 +196,14 @@ public class Deprecated3rdPartyDetector implements Detector {
 
 		@Override public void visitVarInsn(int opcode, int var) { }
 
-		@Override public void visitTypeInsn(int opcode, String type) { }
+		@Override public void visitTypeInsn(int opcode, String type) {
+			ClassDescriptor classDescriptor = DescriptorFactory.createClassDescriptor(type);
+			
+			if (deprecatedClasses.contains(classDescriptor.getDottedClassName())) {
+				BugInstance typeInstructionWithDeprecated = reportNewBugInstance();
+				typeInstructionWithDeprecated.addMethod((MethodAnnotation) fromMethodDescriptor(currentMethodDescriptor));
+			}
+		}
 
 		@Override public void visitFieldInsn(int opcode, String owner, String name, String desc) { }
 
@@ -185,13 +211,11 @@ public class Deprecated3rdPartyDetector implements Detector {
 		    ClassDescriptor methodCalledOn = DescriptorFactory.createClassDescriptor(owner);
 		    
 		    if (deprecatedClasses.contains(methodCalledOn.getDottedClassName())) {
-		        BugInstance callsMethodOfDeprecatedClass = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS",
-                        Priorities.HIGH_PRIORITY);
-		        callsMethodOfDeprecatedClass.addClass(classToAnalyseDescriptor);
-		        callsMethodOfDeprecatedClass.addMethod((MethodAnnotation) MethodAnnotation.fromMethodDescriptor(currentMethodDescriptor));
-                deprecatedUsageBugs.add(callsMethodOfDeprecatedClass);
+		        BugInstance callsMethodOfDeprecatedClass = reportNewBugInstance(); 
+		        addMethodAnnotationToBug(callsMethodOfDeprecatedClass);
 		    }
 		}
+
 
 		@Override public void visitJumpInsn(int opcode, Label label) { }
 
