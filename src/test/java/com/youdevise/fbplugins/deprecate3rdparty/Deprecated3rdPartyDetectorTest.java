@@ -7,24 +7,45 @@ import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
 
 import com.youdevise.fbplugins.tdd4fb.DetectorAssert;
 
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.Detector;
 
+@RunWith(Theories.class)
 public class Deprecated3rdPartyDetectorTest {
 
     private BugReporter bugReporter;
     private Detector detector;
     private Detector detectorToRegisterBugsAs;
 	private DeprecatedSettings settings;
+	
+	@DataPoints public static Class<?>[] expectABug = new Class[] { 
+		HasDeprecatedClassForAField.class,
+		HasADeprecatedClassForALocalVariable.class,
+		HasADeprecatedClassAsAMethodParameter.class,
+		HasADeprecatedClassAsSuperclass.class,
+		ImplementsADeprecatedInterface.class,
+		CallsStaticMethodOfDeprecatedClass.class,
+		ConstructsNewInstanceOfDeprecatedClass.class,
+		DeprecatedInGenerics.HasDeprecatedClassInGenericsOfTypeSignature.class,
+		DeprecatedInGenerics.HasDeprecatedClassInGenericsOfField.class,
+		DeprecatedInGenerics.HasDeprecatedClassInGenericsOfLocalVariable.class,
+		DeprecatedInGenerics.HasDeprecatedClassInMethodParameter.class,
+		UsesDeprecatedClassInInstanceOfCheck.class
+	};
 
     @Before
     public void setUp() {
         bugReporter = DetectorAssert.bugReporterForTesting();
         detectorToRegisterBugsAs = mock(Detector.class);
-        settings = new DeprecatedSettings(asList(MyDeprecatedClass.class.getCanonicalName(), MyDeprecatedInterface.class.getCanonicalName()), 
+        settings = new DeprecatedSettings(asList(MyDeprecatedClass.class.getCanonicalName(), 
+        										 MyDeprecatedInterface.class.getCanonicalName()), 
         							      Collections.<String>emptyList());
         detector = new Deprecated3rdPartyDetector(detectorToRegisterBugsAs, bugReporter, settings); 
     }
@@ -34,64 +55,8 @@ public class Deprecated3rdPartyDetectorTest {
         DetectorAssert.assertNoBugsReported(Deprecated3rdPartyDetector.class, detector, bugReporter);
     }
     
-    @Test
-    public void reportsBugWhenFieldIsADeprecatedClass() throws Exception {
-        DetectorAssert.assertBugReported(HasDeprecatedClassForAField.class, detector, bugReporter);
+    @Theory
+    public void expectBugForAllClassesListed(Class<?> usingDeprecatedClass) throws Exception {
+        DetectorAssert.assertBugReported(usingDeprecatedClass, detector, bugReporter);
     }
-    
-    @Test
-    public void reportsBugWhenLocalVariableIsADeprecatedClass() throws Exception {
-        DetectorAssert.assertBugReported(HasADeprecatedClassForALocalVariable.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenMethodParameterIsADeprecatedClass() throws Exception {
-        DetectorAssert.assertBugReported(HasADeprecatedClassAsAMethodParameter.class, detector, bugReporter);
-    }
-
-    @Test
-    public void reportsBugWhenSuperclassIsADeprecatedClass() throws Exception {
-        DetectorAssert.assertBugReported(HasADeprecatedClassAsSuperclass.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenInterfacesIsDeprecated() throws Exception {
-        DetectorAssert.assertBugReported(ImplementsADeprecatedInterface.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenStaticallyReferencesDeprecatedClass() throws Exception {
-        DetectorAssert.assertBugReported(CallsStaticMethodOfDeprecatedClass.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugConstructingNewInstanceOfDeprecatedClass() throws Exception {
-        DetectorAssert.assertBugReported(ConstructsNewInstanceOfDeprecatedClass.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfSuperclass() throws Exception {
-        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInGenericsOfTypeSignature.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfField() throws Exception {
-        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInGenericsOfField.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfLocalVariable() throws Exception {
-        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInGenericsOfLocalVariable.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenReferencingDeprecatedClassInGenericsOfMethodParameter() throws Exception {
-        DetectorAssert.assertBugReported(DeprecatedInGenerics.HasDeprecatedClassInMethodParameter.class, detector, bugReporter);
-    }
-    
-    @Test
-    public void reportsBugWhenReferencingDeprecatedClassInInstanceOfCheck() throws Exception {
-        DetectorAssert.assertBugReported(UsesDeprecatedClassInInstanceOfCheck.class, detector, bugReporter);
-    }
-    
 }
