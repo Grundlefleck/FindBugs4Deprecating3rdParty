@@ -6,7 +6,7 @@
 	<classpathentry including="**/*.java" kind="src" path="src/test/benchmarks"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/annotations/1.3.8/annotations-1.3.8.jar"/>
-	<classpathentry kind="var" path="M2_REPO/asm/asm/3.1/asm-3.1.jar" sourcepath="/M2_REPO/asm/asm-debug-all/3.2/asm-debug-all-3.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/asm/asm/3.1/asm-3.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/asm/asm-analysis/3.1/asm-analysis-3.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/asm/asm-commons/3.1/asm-commons-3.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/asm/asm-tree/3.1/asm-tree-3.1.jar"/>
@@ -20,11 +20,8 @@
 	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/findbugs/1.3.9/findbugs-1.3.9.jar" sourcepath="/WORKSPACE_ROOT/findbugs"/>
-	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.2/hamcrest-core-1.2.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.2/hamcrest-core-1.2-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/home/graham/.m2/repository/org/hamcrest/hamcrest-core/1.2/hamcrest-core-1.2-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/ibm/icu/icu4j/2.6.1/icu4j-2.6.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/jaxen/jaxen/1.1.1/jaxen-1.1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/jdom/jdom/1.0/jdom-1.0.jar" sourcepath="M2_REPO/jdom/jdom/1.0/jdom-1.0-sources.jar"/>

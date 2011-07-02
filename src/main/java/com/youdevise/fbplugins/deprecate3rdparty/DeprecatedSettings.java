@@ -15,15 +15,18 @@ public class DeprecatedSettings {
     private final boolean isValid;
     private final List<String> invalidLines;
     private final List<String> deprecatedClasses;
+    private final List<Deprecation> deprecations;
 
     public DeprecatedSettings(boolean isValid) {
         this.isValid = isValid;
-        invalidLines = new ArrayList<String>();
-        deprecatedClasses = new ArrayList<String>();
+        this.invalidLines = new ArrayList<String>();
+        this.deprecatedClasses = new ArrayList<String>();
+        this.deprecations = new ArrayList<Deprecation>();
     }
 
-    public DeprecatedSettings(List<String> deprecatedClasses, List<String> invalidLines) {
-        this.deprecatedClasses = deprecatedClasses;
+    public DeprecatedSettings(List<Deprecation> deprecated, List<String> deprecatedClasses, List<String> invalidLines) {
+        this.deprecations = deprecated;
+		this.deprecatedClasses = deprecatedClasses;
         this.invalidLines = invalidLines;
         this.isValid = !deprecatedClasses.isEmpty() && invalidLines.isEmpty();
     }
@@ -39,6 +42,10 @@ public class DeprecatedSettings {
     public List<String> deprecatedClasses() {
         return Collections.unmodifiableList(deprecatedClasses);
     }
+    
+	public List<Deprecation> deprecations() {
+		return Collections.unmodifiableList(deprecations);
+	}
     
     public static DeprecatedSettings settingsFromTxtFile(String fileName) throws Exception {
         BufferedReader reader = null;
@@ -68,20 +75,29 @@ public class DeprecatedSettings {
 
     public static DeprecatedSettings settingsFromTxtContent(List<String> lines) {
         List<String> deprecatedClasses = new ArrayList<String>();
+        List<Deprecation> deprecated = new ArrayList<Deprecation>();
         List<String> invalidLines = new ArrayList<String>();
         for (String line : lines) {
             if (StringUtils.isBlank(line)) {
                 continue;
             }
             
-            if (isValidClassName(line)) {
-                deprecatedClasses.add(line);
+            String[] split = line.split(",");
+            String className = split[0].trim();
+            String reason = "";
+            if (split.length > 1) {
+            	reason = split[1].trim();
+            }
+            
+            if (isValidClassName(className)) {
+                deprecatedClasses.add(className);
+                deprecated.add(Deprecation.of(className, reason));
             } else {
                 invalidLines.add(line);
             }
         }
         
-        return new DeprecatedSettings(deprecatedClasses, invalidLines);
+        return new DeprecatedSettings(deprecated, deprecatedClasses, invalidLines);
     }
 
     private static boolean isValidClassName(String line) {

@@ -2,6 +2,7 @@ package com.youdevise.fbplugins.deprecate3rdparty;
 
 import static com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings.settingsFromTxtContent;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -26,6 +27,15 @@ public class DeprecatedSettingsReaderTest {
     public void validWhenSettingsHasAClassToDeprecate() throws Exception {
         DeprecatedSettings settings = settingsFromTxtContent(asList("java.util.List"));
         assertTrue(settings.isValid());
+    }
+    
+    @Test
+    public void validWhenSettingsHasAClassToDeprecateAndAReason() throws Exception {
+        DeprecatedSettings settings = settingsFromTxtContent(asList("java.util.List, i don't like lists!"));
+        assertTrue(settings.isValid());
+        Deprecation deprecation = settings.deprecations().get(0);
+        assertEquals(deprecation.dottedClassName, "java.util.List");
+        assertEquals(deprecation.reason, "i don't like lists!");
     }
     
     @Test

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <BugCollection version="1.3.7" sequence="0" timestamp="1309262470000" analysisTimestamp="1309262696913" release="">
-  <Project filename="&lt;&lt;unnamed project&gt;&gt;" projectName="FindBugs3rdParty">
+  <Project projectName="FindBugs3rdParty">
     <Jar>/home/gallan/dev/workspaces/scratchpad/FindBugs4Deprecating3rdParty/target/classes</Jar>
     <Jar>/home/gallan/dev/workspaces/scratchpad/FindBugs4Deprecating3rdParty/target/test-classes</Jar>
+    <AuxClasspathEntry>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/lib/test/test-driven-detectors4findbugs-0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/graham/.m2/repository</AuxClasspathEntry>
     <SrcDir>/home/gallan/dev/workspaces/scratchpad/FindBugs4Deprecating3rdParty/src/main/java</SrcDir>
     <SrcDir>/home/gallan/dev/workspaces/scratchpad/FindBugs4Deprecating3rdParty/src/test/benchmarks</SrcDir>
     <SrcDir>/home/gallan/dev/workspaces/scratchpad/FindBugs4Deprecating3rdParty/src/test/java</SrcDir>
+    <WrkDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/etc</WrkDir>
     <SuppressionFilter>
       <LastVersion value="-1" relOp="NEQ"/>
     </SuppressionFilter>
   </Project>
+  <CloudDetails online="false"/>
   <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
     <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter">
       <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" sourcefile="HasADeprecatedClassAsAMethodParameter.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassAsAMethodParameter.java"/>
@@ -53,7 +57,7 @@
       <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" start="3" end="3" startBytecode="0" endBytecode="46" sourcefile="MyDeprecatedClass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/MyDeprecatedClass.java"/>
     </Method>
   </BugInstance>
-  <Errors>
+  <Errors errors="0" missingClasses="19">
     <MissingClass>com.youdevise.fbplugins.tdd4fb.DetectorAssert</MissingClass>
     <MissingClass>edu.umd.cs.findbugs.BugInstance</MissingClass>
     <MissingClass>edu.umd.cs.findbugs.BugReporter</MissingClass>
@@ -74,22 +78,21 @@
     <MissingClass>org.objectweb.asm.FieldVisitor</MissingClass>
     <MissingClass>org.objectweb.asm.MethodVisitor</MissingClass>
   </Errors>
-  <FindBugsSummary timestamp="Tue, 28 Jun 2011 13:01:10 +0100" total_classes="9" total_bugs="6" total_size="244" num_packages="1" vm_version="11.3-b02" cpu_seconds="13.81" clock_seconds="336.58" peak_mbytes="162.77" alloc_mbytes="1765.38" gc_seconds="0.02" priority_1="6">
-    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="6" total_types="13" total_size="244" priority_1="6">
+  <FindBugsSummary timestamp="Tue, 28 Jun 2011 13:01:10 +0100" total_classes="22" referenced_classes="0" total_bugs="6" total_size="488" num_packages="1" vm_version="11.3-b02" cpu_seconds="6.14" clock_seconds="115.25" peak_mbytes="57.35" alloc_mbytes="682.69" gc_seconds="0.04" priority_1="6">
+    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="6" total_types="13" total_size="488" priority_1="6">
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="24" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector$DeprecatedClassVisitor" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="77" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest" sourceFile="Deprecated3rdPartyDetectorTest.java" interface="false" size="15" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourceFile="DeprecatedSettings.java" interface="false" size="53" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettingsReaderTest" sourceFile="DeprecatedSettingsReaderTest.java" interface="false" size="22" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" sourceFile="HasADeprecatedClassAsAMethodParameter.java" interface="false" size="0" bugs="1" priority_1="1"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsSuperclass" sourceFile="HasADeprecatedClassAsSuperclass.java" interface="false" size="0" bugs="1" priority_1="1"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable" sourceFile="HasADeprecatedClassForALocalVariable.java" interface="false" size="0" bugs="1" priority_1="1"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourceFile="HasDeprecatedClassForAField.java" interface="false" size="4" bugs="1" priority_1="1"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ImplementsADeprecatedInterface" sourceFile="ImplementsADeprecatedInterface.java" interface="false" size="0" bugs="1" priority_1="1"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourceFile="MyDeprecatedClass.java" interface="false" size="3" bugs="1" priority_1="1"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector" sourceFile="ThisPluginDetector.java" interface="false" size="26" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector$SetupChecker" sourceFile="ThisPluginDetector.java" interface="false" size="20" bugs="0"/>
     </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.SAXBugCollectionHandler" totalMilliseconds="62" invocations="1" avgMicrosecondsPerInvocation="62782" maxMicrosecondsPerInvocation="62782" standardDeviationMircosecondsPerInvocation="0"/>
+    </FindBugsProfile>
   </FindBugsSummary>
   <ClassFeatures></ClassFeatures>
   <History></History>

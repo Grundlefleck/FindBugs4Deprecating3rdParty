@@ -7,11 +7,54 @@
     <SrcDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/src/main/java</SrcDir>
     <SrcDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/src/test/java</SrcDir>
     <SrcDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/src/test/benchmarks</SrcDir>
+    <WrkDir>/home/graham/dev/workspace/FindBugs4Deprecating3rdParty/etc</WrkDir>
     <SuppressionFilter>
       <LastVersion value="-1" relOp="NEQ"/>
     </SuppressionFilter>
   </Project>
   <CloudDetails online="false"/>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.CallsStaticMethodOfDeprecatedClass">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.CallsStaticMethodOfDeprecatedClass" start="5" end="7" sourcefile="CallsStaticMethodOfDeprecatedClass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/CallsStaticMethodOfDeprecatedClass.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.ConstructsNewInstanceOfDeprecatedClass">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.ConstructsNewInstanceOfDeprecatedClass" start="3" end="7" sourcefile="ConstructsNewInstanceOfDeprecatedClass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/ConstructsNewInstanceOfDeprecatedClass.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest" start="28" end="84" sourcefile="Deprecated3rdPartyDetectorTest.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/Deprecated3rdPartyDetectorTest.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInGenericsOfField">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInGenericsOfField" start="11" end="11" sourcefile="DeprecatedInGenerics.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedInGenerics.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInGenericsOfLocalVariable">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInGenericsOfLocalVariable" start="15" end="19" sourcefile="DeprecatedInGenerics.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedInGenerics.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInGenericsOfTypeSignature">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInGenericsOfTypeSignature" start="9" end="9" sourcefile="DeprecatedInGenerics.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedInGenerics.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInMethodParameter">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedInGenerics$HasDeprecatedClassInMethodParameter" start="22" end="23" sourcefile="DeprecatedInGenerics.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedInGenerics.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
   <BugInstance type="DM_DEFAULT_ENCODING" priority="1" abbrev="Dm" category="I18N">
     <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings">
       <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
@@ -23,6 +66,63 @@
       <SourceLine classname="java.io.FileReader" start="55" end="56" startBytecode="0" endBytecode="40" sourcefile="FileReader.java" sourcepath="java/io/FileReader.java"/>
     </Method>
     <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" start="53" end="53" startBytecode="61" endBytecode="61" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" abbrev="Dm" category="I18N">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+    </Class>
+    <Method classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" name="settingsFromTxtFile" signature="(Ljava/lang/String;)Lcom/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings;" isStatic="true">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" start="51" end="73" startBytecode="0" endBytecode="406" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+    </Method>
+    <Method classname="java.io.FileReader" name="&lt;init&gt;" signature="(Ljava/io/File;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.FileReader" start="55" end="56" startBytecode="0" endBytecode="40" sourcefile="FileReader.java" sourcepath="java/io/FileReader.java"/>
+    </Method>
+    <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" start="60" end="60" startBytecode="61" endBytecode="61" sourcefile="DeprecatedSettings.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/DeprecatedSettings.java"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsAMethodParameter" start="5" end="7" sourcefile="HasADeprecatedClassAsAMethodParameter.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassAsAMethodParameter.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsSuperclass">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassAsSuperclass" start="3" end="3" sourcefile="HasADeprecatedClassAsSuperclass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassAsSuperclass.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasADeprecatedClassForALocalVariable" start="6" end="15" sourcefile="HasADeprecatedClassForALocalVariable.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasADeprecatedClassForALocalVariable.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" start="5" end="5" sourcefile="HasDeprecatedClassForAField.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/HasDeprecatedClassForAField.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" start="3" end="5" sourcefile="MyDeprecatedClass.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/MyDeprecatedClass.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="DEPRECATED_3RD_PARTY_CLASS" priority="1" abbrev="DEP" category="CORRECTNESS">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck" start="3" end="7" sourcefile="UsesDeprecatedClassInInstanceOfCheck.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/UsesDeprecatedClassInInstanceOfCheck.java"/>
+    </Class>
+    <String value="this class sucks"/>
+  </BugInstance>
+  <BugInstance type="UCF_USELESS_CONTROL_FLOW_NEXT_LINE" priority="1" abbrev="UCF" category="STYLE">
+    <Class classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck" sourcefile="UsesDeprecatedClassInInstanceOfCheck.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/UsesDeprecatedClassInInstanceOfCheck.java"/>
+    </Class>
+    <Method classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck" name="someMethod" signature="(Ljava/lang/Object;)V" isStatic="false">
+      <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck" start="6" end="7" startBytecode="0" endBytecode="72" sourcefile="UsesDeprecatedClassInInstanceOfCheck.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/UsesDeprecatedClassInInstanceOfCheck.java"/>
+    </Method>
+    <SourceLine classname="com.youdevise.fbplugins.deprecate3rdparty.UsesDeprecatedClassInInstanceOfCheck" start="6" end="6" startBytecode="4" endBytecode="4" sourcefile="UsesDeprecatedClassInInstanceOfCheck.java" sourcepath="com/youdevise/fbplugins/deprecate3rdparty/UsesDeprecatedClassInInstanceOfCheck.java"/>
   </BugInstance>
   <Errors errors="0" missingClasses="19">
     <MissingClass>com.youdevise.fbplugins.tdd4fb.DetectorAssert</MissingClass>
@@ -45,33 +145,20 @@
     <MissingClass>org.objectweb.asm.FieldVisitor</MissingClass>
     <MissingClass>org.objectweb.asm.MethodVisitor</MissingClass>
   </Errors>
-  <FindBugsSummary timestamp="Mon, 27 Jun 2011 21:23:41 +0100" total_classes="9" referenced_classes="34" total_bugs="1" total_size="244" num_packages="1" vm_version="19.1-b02" cpu_seconds="24.56" clock_seconds="128.72" peak_mbytes="94.10" alloc_mbytes="442.69" gc_seconds="0.21" priority_1="1">
-    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="1" total_types="9" total_size="244" priority_1="1">
+  <FindBugsSummary timestamp="Mon, 27 Jun 2011 21:23:41 +0100" total_classes="63" referenced_classes="34" total_bugs="16" total_size="1708" num_packages="1" vm_version="19.1-b02" cpu_seconds="56.32" clock_seconds="14145.00" peak_mbytes="176.42" alloc_mbytes="442.69" gc_seconds="0.51" priority_1="16">
+    <PackageStats package="com.youdevise.fbplugins.deprecate3rdparty" total_bugs="16" total_types="19" total_size="1708" priority_1="16">
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="24" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetector$DeprecatedClassVisitor" sourceFile="Deprecated3rdPartyDetector.java" interface="false" size="77" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest" sourceFile="Deprecated3rdPartyDetectorTest.java" interface="false" size="15" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourceFile="DeprecatedSettings.java" interface="false" size="53" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.Deprecated3rdPartyDetectorTest" sourceFile="Deprecated3rdPartyDetectorTest.java" interface="false" size="15" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettings" sourceFile="DeprecatedSettings.java" interface="false" size="53" bugs="2" priority_1="2"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.DeprecatedSettingsReaderTest" sourceFile="DeprecatedSettingsReaderTest.java" interface="false" size="22" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourceFile="HasDeprecatedClassForAField.java" interface="false" size="4" bugs="0"/>
-      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourceFile="MyDeprecatedClass.java" interface="false" size="3" bugs="0"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.HasDeprecatedClassForAField" sourceFile="HasDeprecatedClassForAField.java" interface="false" size="4" bugs="1" priority_1="1"/>
+      <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.MyDeprecatedClass" sourceFile="MyDeprecatedClass.java" interface="false" size="3" bugs="1" priority_1="1"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector" sourceFile="ThisPluginDetector.java" interface="false" size="26" bugs="0"/>
       <ClassStats class="com.youdevise.fbplugins.deprecate3rdparty.ThisPluginDetector$SetupChecker" sourceFile="ThisPluginDetector.java" interface="false" size="20" bugs="0"/>
     </PackageStats>
     <FindBugsProfile>
-      <ClassProfile name="edu.umd.cs.findbugs.FindBugs2" totalMilliseconds="3339" invocations="2" avgMicrosecondsPerInvocation="1669636" maxMicrosecondsPerInvocation="1965399" standardDeviationMircosecondsPerInvocation="295760"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="927" invocations="445" avgMicrosecondsPerInvocation="2085" maxMicrosecondsPerInvocation="132080" standardDeviationMircosecondsPerInvocation="7156"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="789" invocations="446" avgMicrosecondsPerInvocation="1770" maxMicrosecondsPerInvocation="49986" standardDeviationMircosecondsPerInvocation="5064"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.ExplicitSerialization" totalMilliseconds="618" invocations="34" avgMicrosecondsPerInvocation="18185" maxMicrosecondsPerInvocation="152773" standardDeviationMircosecondsPerInvocation="31778"/>
-      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="616" invocations="962" avgMicrosecondsPerInvocation="641" maxMicrosecondsPerInvocation="23106" standardDeviationMircosecondsPerInvocation="2059"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="571" invocations="34" avgMicrosecondsPerInvocation="16803" maxMicrosecondsPerInvocation="89482" standardDeviationMircosecondsPerInvocation="24515"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="377" invocations="34" avgMicrosecondsPerInvocation="11117" maxMicrosecondsPerInvocation="89820" standardDeviationMircosecondsPerInvocation="18593"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="377" invocations="64" avgMicrosecondsPerInvocation="5892" maxMicrosecondsPerInvocation="98816" standardDeviationMircosecondsPerInvocation="15540"/>
-      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="333" invocations="63" avgMicrosecondsPerInvocation="5290" maxMicrosecondsPerInvocation="101300" standardDeviationMircosecondsPerInvocation="14018"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="331" invocations="89" avgMicrosecondsPerInvocation="3724" maxMicrosecondsPerInvocation="87550" standardDeviationMircosecondsPerInvocation="10918"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="329" invocations="63" avgMicrosecondsPerInvocation="5236" maxMicrosecondsPerInvocation="81856" standardDeviationMircosecondsPerInvocation="12586"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="280" invocations="63" avgMicrosecondsPerInvocation="4450" maxMicrosecondsPerInvocation="60218" standardDeviationMircosecondsPerInvocation="10419"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="278" invocations="63" avgMicrosecondsPerInvocation="4427" maxMicrosecondsPerInvocation="250161" standardDeviationMircosecondsPerInvocation="31243"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="199" invocations="34" avgMicrosecondsPerInvocation="5872" maxMicrosecondsPerInvocation="38694" standardDeviationMircosecondsPerInvocation="9769"/>
+      <ClassProfile name="edu.umd.cs.findbugs.SAXBugCollectionHandler" totalMilliseconds="104" invocations="1" avgMicrosecondsPerInvocation="104227" maxMicrosecondsPerInvocation="104227" standardDeviationMircosecondsPerInvocation="0"/>
     </FindBugsProfile>
   </FindBugsSummary>
   <ClassFeatures></ClassFeatures>

@@ -44,7 +44,12 @@ public class Deprecated3rdPartyDetectorTest {
     public void setUp() {
         bugReporter = DetectorAssert.bugReporterForTesting();
         detectorToRegisterBugsAs = mock(Detector.class);
-        settings = new DeprecatedSettings(asList(MyDeprecatedClass.class.getCanonicalName(), 
+        
+        Deprecation myDeprecatedClass = Deprecation.of(MyDeprecatedClass.class.getCanonicalName(), "");
+        Deprecation myDeprecatedInterface = Deprecation.of(MyDeprecatedInterface.class.getCanonicalName(), "cause i said so");
+        
+        settings = new DeprecatedSettings(asList(myDeprecatedClass, myDeprecatedInterface),
+        		                          asList(MyDeprecatedClass.class.getCanonicalName(), 
         										 MyDeprecatedInterface.class.getCanonicalName()), 
         							      Collections.<String>emptyList());
         detector = new Deprecated3rdPartyDetector(detectorToRegisterBugsAs, bugReporter, settings); 
@@ -59,4 +64,5 @@ public class Deprecated3rdPartyDetectorTest {
     public void expectBugForAllClassesListed(Class<?> usingDeprecatedClass) throws Exception {
         DetectorAssert.assertBugReported(usingDeprecatedClass, detector, bugReporter);
     }
+    
 }

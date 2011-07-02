@@ -2,8 +2,9 @@ package com.youdevise.fbplugins.deprecate3rdparty;
 
 import static edu.umd.cs.findbugs.classfile.DescriptorFactory.createClassDescriptorFromDottedClassName;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantPool;
@@ -20,7 +21,7 @@ public class Deprecated3rdPartyDetector implements Detector {
 
 	private final Detector thisPluginDetector;
 	private final BugReporter bugReporter;
-	private final List<ClassDescriptor> deprecatedClasses;
+	private final Map<ClassDescriptor, String> deprecatedClasses;
 
 	public Deprecated3rdPartyDetector(Detector thisPluginDetector, BugReporter bugReporter, DeprecatedSettings settings) {
 		this.thisPluginDetector = thisPluginDetector;
@@ -28,11 +29,11 @@ public class Deprecated3rdPartyDetector implements Detector {
 		this.deprecatedClasses = deprecatedClassesFrom(settings);
 	}
 
-	private List<ClassDescriptor> deprecatedClassesFrom(DeprecatedSettings settings) {
-		List<ClassDescriptor> descriptors = new ArrayList<ClassDescriptor>();
-		for (String deprecatedClass : settings.deprecatedClasses()) {
-			ClassDescriptor descriptor = createClassDescriptorFromDottedClassName(deprecatedClass);
-			descriptors.add(descriptor);
+	private Map<ClassDescriptor, String> deprecatedClassesFrom(DeprecatedSettings settings) {
+		Map<ClassDescriptor, String> descriptors = new HashMap<ClassDescriptor, String>();
+		for (Deprecation deprecatedClass : settings.deprecations()) {
+			ClassDescriptor descriptor = createClassDescriptorFromDottedClassName(deprecatedClass.dottedClassName);
+			descriptors.put(descriptor, deprecatedClass.reason);
 		}
 		return descriptors;
 	}
@@ -55,10 +56,13 @@ public class Deprecated3rdPartyDetector implements Detector {
 	}
 
 	private void reportBugIfDeprecatedTypeIsReferenced(ClassDescriptor analyzedClassDescriptor, String poolEntry) {
-		for (ClassDescriptor deprecatedClass : deprecatedClasses) {
-			if (poolEntry.contains(deprecatedClass.getClassName())) {
+		for (Entry<ClassDescriptor, String> deprecatedClass : deprecatedClasses.entrySet()) {
+			String className = deprecatedClass.getKey().getClassName();
+			String reason = deprecatedClass.getValue();
+			if (poolEntry.contains(className)) {
 				BugInstance bugInstance = new BugInstance(thisPluginDetector, "DEPRECATED_3RD_PARTY_CLASS", Priorities.HIGH_PRIORITY)
-										  	      .addClass(analyzedClassDescriptor);
+										  	      .addClass(analyzedClassDescriptor)
+											      .add(new DeprecationAnnotation(deprecatedClass.getKey().getDottedClassName(), reason));
 				bugReporter.reportBug(bugInstance);
 			}
 		}

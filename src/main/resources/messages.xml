@@ -21,7 +21,7 @@
   <BugPattern type="DEPRECATED_3RD_PARTY_CLASS">
     <ShortDescription>Use of a 3rd party class which you declared as deprecated</ShortDescription>
 
-<LongDescription>{0} makes use of a 3rd party class which you have declared as deprecated.</LongDescription>
+    <LongDescription>{0} makes use of a 3rd party class which you have declared as deprecated. {1} has been deprecated because "{1.reason}"</LongDescription>
 
 <Details>
   <![CDATA[<p>
