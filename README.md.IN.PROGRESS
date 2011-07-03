@@ -1,0 +1,33 @@
+# NOTE: IN PROGRESS #
+
+# FindBugs4Deprecating3rdParty #
+
+[FindBugs](http://findbugs.sourceforge.net/) plugin which can be used to mark 3rd party types as deprecated. Copyright 2011 [youDevise, Ltd.](http://www.youdevise.com).
+
+# Rationale #
+The @Deprecated annotation exists to allow you to mark code as retired. This is applicable when you have control over the code, and are able to add the annotation where and when you choose. However, if you decide that you wish to deprecate code which you have no control over (i.e. 3rd party code) the @Deprecated annotation cannot be used. This FindBugs plugin allows you to specify 3rd party classes which are deprecated, and report on uses of such code. 
+
+# Installation #
+
+With a configured and running FindBugs installation, download the FindBugs4Deprecating3rdParty jar (NOTE: download has not been added yet) and place it in the 'plugin' directory of your FindBugs installation. FindBugs will automatically enable the JAR the next time an analysis is run. TODO: how to configure deprecated classes.
+
+# What does the plugin do? #
+
+The plugin will detect uses of types you have marked as deprecated. Much like the @Deprecation annotation, the severity of the warning will depend on how you use the plugin. A high priority warning will be raised, in cases where use of the deprecated class are justified, the warnings will need to be suppressed.
+
+
+# Building from source #
+
+The project can be built with [Maven](http://maven.apache.org/).
+
+'mvn package' is required to build the plugin jar with the relevant config files included.
+
+# License #
+
+Open source under the very permissive [MIT license](https://github.com/Grundlefleck/FindBugs4Deprecating3rdParty/blob/master/LICENSE).
+
+# Acknowledgements #
+
+A project of [youDevise](https://dev.youdevise.com). We're [hiring](http://www.youdevise.com/careers)!
+
+
