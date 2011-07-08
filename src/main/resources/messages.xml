@@ -26,11 +26,6 @@
 <Details>
   <![CDATA[<p>
     A 3rd party class which has been deprecated is being used here. Refactor the code to remove references to any deprecated class(es).
-    <p>
-    The @Deprecated annotation exists to allow you to mark code as retired. This is applicable when you have control over the code, and are able
-    to add the annotation where and when you choose. However, if you decide that you wish to deprecate code which you have no control over (i.e. 
-    3rd party code) the @Deprecated annotation cannot be used. This FindBugs plugin allows you to specify 3rd party code which is deprecated, 
-    and report on uses of such code. 
   ]]>
 </Details>
   </BugPattern>
