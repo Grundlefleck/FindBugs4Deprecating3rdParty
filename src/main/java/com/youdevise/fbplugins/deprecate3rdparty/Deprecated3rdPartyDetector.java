@@ -50,6 +50,9 @@ public class Deprecated3rdPartyDetector implements Detector {
 		int poolSize = constantPoolGen.getSize();
 		for (int i = 1; i < poolSize; i++) {
 			Constant constant = finalConstantPool.getConstant(i);
+			
+			if (constant == null) continue;
+			
 			String poolEntry = constant.toString();
 			reportBugIfDeprecatedTypeIsReferenced(classDescriptor, poolEntry);
 		}
