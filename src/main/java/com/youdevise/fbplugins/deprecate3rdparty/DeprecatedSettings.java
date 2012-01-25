@@ -83,15 +83,21 @@ public class DeprecatedSettings {
             }
             
             String[] split = line.split(",");
-            String className = split[0].trim();
+            String[] classAndPossiblyMethodName = split[0].trim().split("#");
             String reason = "";
             if (split.length > 1) {
             	reason = split[1].trim();
             }
             
+            String className = classAndPossiblyMethodName[0];
+            
             if (isValidClassName(className)) {
                 deprecatedClasses.add(className);
-                deprecated.add(Deprecation.of(className, reason));
+                if (noMethodNameSpecified(classAndPossiblyMethodName)) {
+                    deprecated.add(Deprecation.of(className, reason));
+                } else if (includesValidMethod(classAndPossiblyMethodName)) {
+                    deprecated.add(MethodDeprecation.ofMethod(className, classAndPossiblyMethodName[1], reason));
+                }
             } else {
                 invalidLines.add(line);
             }
@@ -100,11 +106,24 @@ public class DeprecatedSettings {
         return new DeprecatedSettings(deprecated, deprecatedClasses, invalidLines);
     }
 
-    private static boolean isValidClassName(String line) {
-        String fullyQualifiedClassNameMatcher = "([\\p{L}_$][\\p{L}\\p{N}_$]*\\.)*[\\p{L}_$][\\p{L}\\p{N}_$]*";
+    private static boolean noMethodNameSpecified(String[] classAndPossiblyMethodName) {
+        return classAndPossiblyMethodName.length < 2;
+    }
+
+    private static boolean includesValidMethod(String[] classAndPossiblyMethodName) {
+        String methodName = classAndPossiblyMethodName[1];
+
+        // http://stackoverflow.com/questions/2008279/validate-a-javascript-function-name
+        String methodNameMatcher = "^[A-Za-z_][0-9A-Za-z_]*";
+        
+        return Pattern.matches(methodNameMatcher, methodName);
+    }
+
+    private static boolean isValidClassName(String className) {
         // http://stackoverflow.com/questions/5205339/
+        String fullyQualifiedClassNameMatcher = "([\\p{L}_$][\\p{L}\\p{N}_$]*\\.)*[\\p{L}_$][\\p{L}\\p{N}_$]*";
             
-        return Pattern.matches(fullyQualifiedClassNameMatcher, line);
+        return Pattern.matches(fullyQualifiedClassNameMatcher, className);
     }
 
     
