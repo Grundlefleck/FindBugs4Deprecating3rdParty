@@ -9,6 +9,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import com.youdevise.fbplugins.deprecate3rdparty.method.CallsDeprecatedInstanceMethod;
+import com.youdevise.fbplugins.deprecate3rdparty.method.CallsDeprecatedInterfaceMethod;
 import com.youdevise.fbplugins.deprecate3rdparty.method.CallsDeprecatedStaticMethod;
 import com.youdevise.fbplugins.tdd4fb.DetectorAssert;
 
@@ -24,20 +25,21 @@ public class Deprecated3rdPartyDetectorTest {
 	private DeprecatedSettings settings;
 	
 	@DataPoints public static Class<?>[] expectABug = new Class[] { 
-//	       HasDeprecatedClassForAField.class,
-//	        HasADeprecatedClassForALocalVariable.class,
-//	        HasADeprecatedClassAsAMethodParameter.class,
-//	        HasADeprecatedClassAsSuperclass.class,
-//	        ImplementsADeprecatedInterface.class,
-//	        CallsStaticMethodOfDeprecatedClass.class,
-//	        ConstructsNewInstanceOfDeprecatedClass.class,
-//	        DeprecatedInGenerics.HasDeprecatedClassInGenericsOfTypeSignature.class,
-//	        DeprecatedInGenerics.HasDeprecatedClassInGenericsOfField.class,
-//	        DeprecatedInGenerics.HasDeprecatedClassInGenericsOfLocalVariable.class,
-//	        DeprecatedInGenerics.HasDeprecatedClassInMethodParameter.class,
-//	        UsesDeprecatedClassInInstanceOfCheck.class,
+	       HasDeprecatedClassForAField.class,
+	        HasADeprecatedClassForALocalVariable.class,
+	        HasADeprecatedClassAsAMethodParameter.class,
+	        HasADeprecatedClassAsSuperclass.class,
+	        ImplementsADeprecatedInterface.class,
+	        CallsStaticMethodOfDeprecatedClass.class,
+	        ConstructsNewInstanceOfDeprecatedClass.class,
+	        DeprecatedInGenerics.HasDeprecatedClassInGenericsOfTypeSignature.class,
+	        DeprecatedInGenerics.HasDeprecatedClassInGenericsOfField.class,
+	        DeprecatedInGenerics.HasDeprecatedClassInGenericsOfLocalVariable.class,
+	        DeprecatedInGenerics.HasDeprecatedClassInMethodParameter.class,
+	        UsesDeprecatedClassInInstanceOfCheck.class,
 	        CallsDeprecatedInstanceMethod.class,
-	        CallsDeprecatedStaticMethod.class
+	        CallsDeprecatedStaticMethod.class,
+	        CallsDeprecatedInterfaceMethod.class
 	};
 
     @Before

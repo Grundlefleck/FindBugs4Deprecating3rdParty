@@ -9,6 +9,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import com.youdevise.fbplugins.deprecate3rdparty.method.CallsNonDeprecatedInstanceMethodOfClassWhichAlsoContainsDeprecatedMethod;
+import com.youdevise.fbplugins.deprecate3rdparty.method.CallsNonDeprecatedInterfaceMethodOfInterfaceWhichAlsoContainsDeprecatedMethod;
 import com.youdevise.fbplugins.deprecate3rdparty.method.CallsNonDeprecatedStaticMethodOfClassWhichAlsoContainsDeprecatedMethod;
 import com.youdevise.fbplugins.tdd4fb.DetectorAssert;
 
@@ -27,6 +28,7 @@ public class Deprecated3rdPartyDetectorFalsePositivesTest {
 		Deprecated3rdPartyDetector.class,
         CallsNonDeprecatedInstanceMethodOfClassWhichAlsoContainsDeprecatedMethod.class,
         CallsNonDeprecatedStaticMethodOfClassWhichAlsoContainsDeprecatedMethod.class,
+        CallsNonDeprecatedInterfaceMethodOfInterfaceWhichAlsoContainsDeprecatedMethod.class
 	};
 
     @Before
